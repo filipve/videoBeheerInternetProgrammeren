@@ -12,3 +12,27 @@
 
 
 
+Vragen voor project:
+
+Hoe moeten we nu database bijhouden?
+
+Is project zo goed tot nu?
+
+Moeten we voor testing exceptions doen of hoe dan?
+
+Repository op github ok?
+
+project genoeg tot nu?
+
+wat ontbreekt nog?
+
+
+##tips
+
+altijd met packages werken
+
+
+
+
+
+
