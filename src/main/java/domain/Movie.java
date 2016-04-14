@@ -5,10 +5,13 @@ import domain.person.Actor;
 import helperclasses.MovieEvaluation;
 import helperclasses.MovieGenre;
 import helperclasses.MovieRating;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by filipve on 17/02/2016.
@@ -21,8 +24,16 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotNull
+    @Size(min=3,max = 80)
     private String title;
+
+    //@NotNull
+    //@Size(min = 3, max=40)
+    @NotEmpty(message = "Please enter the name!")
     private String director;
+
+    @NotNull
     private int jaar;
 
     @Enumerated(EnumType.STRING)
@@ -100,9 +111,12 @@ public Movie(){
     }
 
     public void setDirector(String director) {
+        /*
         if (director == null || director.isEmpty()) {
             throw new DomainException("director cannot be null or empty");
         }
+        */
+
         this.director = director;
     }
 
