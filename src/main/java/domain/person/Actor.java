@@ -21,9 +21,16 @@ public class Actor extends Person {
         super();
     }
 
+    /*
     public Actor(String name, String familyName,
                  Age dateOfBirth, GenderPerson gender) {
         super(name,familyName,dateOfBirth,gender);
+        this.moviesPlayedIn = new ArrayList<Movie>();
+    }*/
+
+    public Actor(String name, String familyName,
+                 int dagGeboorte, int maandGeboorte, int jaarGeboorte, boolean geslacht) {
+        super(name,familyName,dagGeboorte,maandGeboorte,jaarGeboorte,geslacht);
         this.moviesPlayedIn = new ArrayList<Movie>();
     }
 

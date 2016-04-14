@@ -29,4 +29,6 @@ public enum MovieEvaluation {
     public String toString(){
         return getRating().toString();
     }
+
+
 }

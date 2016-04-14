@@ -2,6 +2,10 @@ package db;
 
 import domain.Movie;
 import domain.person.Actor;
+import domain.person.GenderPerson;
+import helperclasses.MovieEvaluation;
+import helperclasses.MovieGenre;
+import helperclasses.MovieRating;
 import org.eclipse.persistence.exceptions.DatabaseException;
 
 import javax.persistence.EntityManager;
@@ -18,6 +22,7 @@ import java.util.Map;
  */
 
 public class VideoBeheerRelationalDatabase implements OpslagVerbindingInterface {
+
 
     private static int instanceCounterMovies = 0;
     private static int instanceCounterActors = 0;
@@ -37,7 +42,10 @@ public class VideoBeheerRelationalDatabase implements OpslagVerbindingInterface 
     public VideoBeheerRelationalDatabase() {
         beheer = new HashMap<Integer, Movie>();
         actors = new HashMap<Integer, Actor>();
+
     }
+
+
 
     public void openConnection() {
 
@@ -82,8 +90,19 @@ public class VideoBeheerRelationalDatabase implements OpslagVerbindingInterface 
     }
 
     public List<Actor> getAllActors() {
-        return new ArrayList<Actor>(actors.values());
+        try {
+            openConnection();
+
+            Query query = manager.createQuery("select act from Actor act");
+            List<Actor> actors = query.getResultList();
+            return actors;
+        } catch (Exception e) {
+            throw new DBException(e.getMessage(), e);
+        }
+
+
     }
+
 
     /**
      * CRUD ==> create
@@ -203,7 +222,7 @@ The EntityManager and container will update the database automatically (when the
         openConnection();
 
         manager.getTransaction().begin();
-        Movie movie = manager.find(Movie.class,id);
+        Movie movie = manager.find(Movie.class, id);
         manager.remove(movie);
         manager.getTransaction().commit();
         closeConnection();
@@ -213,12 +232,29 @@ The EntityManager and container will update the database automatically (when the
      * CRUD ==> create
      */
     public void addActor(Actor actor) {
+
+        /*
         instanceCounterActors++;
         counterActors = instanceCounterActors;
 
         actor.setId(counterActors);
         actors.put(counterActors, actor);
+
+        */
+
+        openConnection();
+
+        manager.getTransaction().begin();
+
+        //Actor actor1 = manager.find(Actor.class,actor.getId());
+
+        manager.persist(actor);
+        manager.flush();
+        manager.getTransaction().commit();
+        closeConnection();
     }
+
+
 
     /**
      * CRUD ==> create 2

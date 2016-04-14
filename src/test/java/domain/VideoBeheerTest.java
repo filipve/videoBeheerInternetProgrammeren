@@ -52,8 +52,10 @@ public class VideoBeheerTest extends TestCase {
                 false);
         //System.out.println(movie.toString());
 
-        actor = new Actor("Ian","Mc Kellen",new Age(LocalDate.of(1939, Month.MAY,25)), GenderPerson.MALE);
-        actor2 = new Actor("Martin","Freeman",new Age(LocalDate.of(1971,Month.SEPTEMBER,8)), GenderPerson.MALE);
+        //actor = new Actor("Ian","Mc Kellen",new Age(LocalDate.of(1939, Month.MAY,25)), GenderPerson.MALE);
+        actor = new Actor("Ian","Mc Kellen", 20,4,1994, true);
+        //actor2 = new Actor("Martin","Freeman",new Age(LocalDate.of(1971,Month.SEPTEMBER,8)), GenderPerson.MALE);
+        actor2 = new Actor("Martin","Freeman",20,5,1995, true);
 
     }
 
@@ -167,12 +169,14 @@ vdb.addActor(actor,movie);
     @Test
     public void test_update_actor() throws Exception{
 Actor act = actor;
-        act.setGender(GenderPerson.FEMALE);
+        //act.setGender(GenderPerson.FEMALE);
+        act.setGeslacht(true);
         vdb.updateActor(act,actor);
         List<Actor> actorList = vdb.getAllActors();
         printResultaatLijst(actorList);
 
-        assertEquals(GenderPerson.FEMALE,vdb.getAllActors().get(0).getGender());
+       // assertEquals(GenderPerson.FEMALE,vdb.getAllActors().get(0).getGender());
+        assertEquals(false,vdb.getAllActors().get(0).isGeslacht());
     }
 
     @Test
